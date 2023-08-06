@@ -1,4 +1,4 @@
-package BankingApplication;
+package bankapplication;
 
 public enum AccountTypes {
     CURRENT("Current"),
