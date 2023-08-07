@@ -20,7 +20,7 @@ public class MongoDBClient {
 
     public void DBconnection() {
         // Replace the placeholder with your Atlas connection string
-        String uri = "mongodb+srv://pratyush_motha:hEvalckHFiTx6VvH@cluster0.irga57n.mongodb.net/";
+        String uri = "";
 
         // Construct a ServerApi instance using the ServerApi.builder() method
         ServerApi serverApi = ServerApi.builder()
@@ -52,15 +52,15 @@ public class MongoDBClient {
 
     // getter for collection
     public void getDocumentsFromCollection() {
-
         mCollection = database.getCollection("Accounts");
         FindIterable<Document> iterDoc = mCollection.find();
-
         for (Document doc : iterDoc) {
             System.out.println("Account Holder is: " + doc.get("AccountName") + ", has a Balance of: " + doc.get("AccountBalance") +", Account type is: "+ doc.get("AccountType"));
         }
 
     }
+
+
 
     public void insertDocumentsToCollection(BankAccount ba) {
         mCollection = database.getCollection("Accounts");
@@ -69,6 +69,12 @@ public class MongoDBClient {
         document.put("AccountBalance", ba.getAccountBalance());
         document.put("AccountType", ba.getAccountType());
         mCollection.insertOne(document);
+    }
+
+    public void deleteDocumentFromCollection(String AccountName){
+        mCollection = database.getCollection("Accounts");
+        mCollection.deleteOne(new Document("AccountName", AccountName));
+        System.out.print("Account Deleted Successfully!");
     }
 
     public void closeConnection() {
