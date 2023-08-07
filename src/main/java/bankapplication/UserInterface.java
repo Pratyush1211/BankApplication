@@ -12,7 +12,9 @@ public class UserInterface {
 
         do {
             dbClient.DBconnection();
-            System.out.println("************** WELCOME TO BANK ****************");
+            System.out.println("___________________________________________________");
+            System.out.println(" ");
+            System.out.println("*****************WELCOME TO BANK *******************");
             System.out.println("___________________________________________________");
             System.out.println("\n Choose an option:\n(a) Add Account\n(l) Display Accounts\n(q) Quit");
 
@@ -35,12 +37,11 @@ public class UserInterface {
 
                     if (type.equals("Current")) {
                         BankAccount regularAccount = new BankAccount(name, balance);
-                        dbClient.insertDocumentsToCollection(name, balance, type);
-                        // accountsList.add(regularAccount);
+                        dbClient.insertDocumentsToCollection(regularAccount);
+        
                     } else if (type.equals("Savings")) {
                         SavingsAccount savingsAccount = new SavingsAccount(name, balance, type);
-                        dbClient.insertDocumentsToCollection(name, balance, type);
-                        // accountsList.add(savingsAccount);
+                        dbClient.insertDocumentsToCollection(savingsAccount);
                     } else {
                         System.out.println("Invalid type, retry");
                         break;

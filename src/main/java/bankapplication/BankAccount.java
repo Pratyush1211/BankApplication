@@ -2,11 +2,12 @@ package bankapplication;
 
 import bankapplication.CustomExceptions.InvalidAmountWithdrawalException;
 
-public class BankAccount {
+public class BankAccount{
 
     private String accountName;
     private double accountBalance;
     private String accountType = AccountTypes.CURRENT.getAccountType(); // default value for account type be "CURRENT"
+
 
     public BankAccount(String accountName, double accountBalance) {
         this.accountName = accountName;
@@ -17,6 +18,7 @@ public class BankAccount {
         this.accountName = accountName;
         this.accountBalance = accountBalance;
         this.accountType = accountType;
+
     }
 
     // setters for Balance available in account
@@ -41,6 +43,7 @@ public class BankAccount {
             System.out.println(" Error Encountered:" + e.getMessage());
         }
     }
+
 
 
     //getters

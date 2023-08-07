@@ -40,7 +40,7 @@ public class MongoDBClient {
                 // Send a ping to confirm a successful connection
                 Bson command = new BsonDocument("ping", new BsonInt64(1));
                 Document commandResult = database.runCommand(command);
-                System.out.println("Pinged your deployment. You successfully connected to MongoDB!");
+                System.out.println("You successfully connected to MongoDB!");
             } catch (MongoException me) {
                 System.err.println(me);
             }
@@ -49,23 +49,25 @@ public class MongoDBClient {
         }
     }
 
+
+    // getter for collection
     public void getDocumentsFromCollection() {
+
         mCollection = database.getCollection("Accounts");
         FindIterable<Document> iterDoc = mCollection.find();
-        // Getting the iterator
+
         for (Document doc : iterDoc) {
-            System.out.println(doc.toJson());
+            System.out.println("Account Holder is: " + doc.get("AccountName") + ", has a Balance of: " + doc.get("AccountBalance") +", Account type is: "+ doc.get("AccountType"));
         }
 
     }
 
-
-    public void insertDocumentsToCollection(String accountName, double accountBalance, String accountType) {
+    public void insertDocumentsToCollection(BankAccount ba) {
         mCollection = database.getCollection("Accounts");
         Document document = new Document();
-        document.put("AccountName", accountName);
-        document.put("AccountBalance", accountBalance);
-        document.put("AccountType", accountType);
+        document.put("AccountName", ba.getAccountName());
+        document.put("AccountBalance", ba.getAccountBalance());
+        document.put("AccountType", ba.getAccountType());
         mCollection.insertOne(document);
     }
 
